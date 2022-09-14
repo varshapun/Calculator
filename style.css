@@ -634,10 +634,6 @@ video {
   border-right-width: 0px;
 }
 
-.border-b-4 {
-  border-bottom-width: 4px;
-}
-
 .border-teal-300 {
   --tw-border-opacity: 1;
   border-color: rgb(94 234 212 / var(--tw-border-opacity));

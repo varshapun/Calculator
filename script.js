@@ -22,7 +22,7 @@ let currentVal = ''
 let prevValue;
 let spacialOp = false;
 let dotop = false;
-
+let prevOp = '';
 // History list
 const historyList = document.querySelector('.history-list')
 const historyContainer = document.querySelector('.history-container')
@@ -141,7 +141,14 @@ const operationPerform = (e) => {
 
     }
 
-    operation = e.target.id;
+    if (e.target.id === 'equal') {
+       operation = prevOp
+    }
+    else {
+        operation = e.target.id;
+        currentVal = ''
+    }
+    
     console.log(
         `
         after perform 
@@ -165,6 +172,7 @@ const squarePerform = (e) => {
     screen.value = prevValue;
     currentVal = prevValue;
     operation = ""; 
+    prevOp = operation;
     spacialOp = true;
     dotop = false;
 }
@@ -210,7 +218,7 @@ const handleC = (e) => {
     currentVal = "0"
     screen.value = '0'
     prevValue = ""
-    toggle = '0'
+    toggle = 0
     operation = ''
     spacialOp = false;
     dotop = false;   
