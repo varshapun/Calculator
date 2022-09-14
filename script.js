@@ -141,12 +141,13 @@ const operationPerform = (e) => {
 
     }
 
-    if (e.target.id === 'equal') {
-       operation = prevOp
+    if (e.target.id !== 'equal') {
+        operation = e.target.id;
+        
+       
     }
     else {
-        operation = e.target.id;
-        currentVal = ''
+        operation = prevOp
     }
     
     console.log(
