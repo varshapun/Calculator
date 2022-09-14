@@ -601,6 +601,10 @@ video {
   margin-left: calc(7rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
 .rounded-2xl {
   border-radius: 1rem;
 }
@@ -628,6 +632,10 @@ video {
 
 .border-r-0 {
   border-right-width: 0px;
+}
+
+.border-b-4 {
+  border-bottom-width: 4px;
 }
 
 .border-teal-300 {
