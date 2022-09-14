@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    overflow: hidden;
+}
+
+#back {
+    height: 100vh;
+
+}
+
+#back .main-container {
+    height: 700px;
+    width: 450px;
+    position: relative;
+    overflow: hidden;
+}
+
+.history-container {
+    width: 100%;
+    position: fixed;
+    height: 0px;
+    bottom: 0;
+}
+
+.history-container li {
+    border-bottom: 1px rgb(175, 222, 222) solid;
+    padding: 10px 0;
+}
