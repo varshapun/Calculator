@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+<body >
+    <section id="back" class="flex items-center justify-center w-full bg-gradient-to-r from-teal-200 to-transparent">
+        <div class="relative main-container rounded-2xl ring-1 backdrop-opacity-75 bg-teal-50 ring-gray-500">
+              
+            <div class="flex justify-center w-full py-5 text-2xl italic font-semibold text-center text-white bg-teal-700 space-x-28 heading rounded-t-2xl">
+                    <h3 class="">Calculator </h3>
+                     
+                     <i class="absolute cursor-pointer history-btn fa-solid fa-clock-rotate-left right-5"></i>
+                
+            </div>
+            <div class="w-full text-5xl ">
+               
+                        
+                   
+                   <input type="text" readonly placeholder="0" maxlength="16" class="w-full p-5 py-10 text-right bg-teal-100 border-0 outline-none caret-transparent focus:outline-none placeholder:text-black screen">
+                  
+                   
+            </div>
+            <div class="w-full p-1 button-container ">
+                   <div class="flex border-teal-300 btn-line-1">
+                        <button class="p-5 text-xl transition-all duration-200 bg-teal-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100" id="modulo">%</button>
+                        <button class="p-5 text-xl transition-all duration-200 bg-teal-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100" id="ce">CE</button>
+                        <button class="p-5 text-xl transition-all duration-200 bg-teal-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100" id="c">C</button>
+                        <button class="p-5 text-xl transition-all duration-200 bg-teal-200 border-2 border-gray-200 basis-1/4 hover:bg-gray-100 btn-last" id="delete"><i class="text-teal-700 fa-solid fa-delete-left fa-xl"></i></button>
+                   </div>
+                   <div class="flex border-teal-300 btn-line-2">
+                        <button class="p-5 text-xl transition-all duration-200 bg-teal-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100" id="one-x">1/&#x1D465;</button>
+                        <button class="p-5 text-xl transition-all duration-200 bg-teal-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100" id="square">&#x1D465;<sup>2</sup></button>
+                        <button class="p-5 text-xl transition-all duration-200 bg-teal-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100" id="rootsq">&radic;</button>
+                        <button class="p-5 text-2xl transition-all duration-200 bg-teal-200 border-2 border-gray-200 basis-1/4 hover:bg-gray-100 btn-last" id="devide">&divide;</button>
+                   </div>
+                   <div class="flex border-teal-300 btn-line-2">
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="7">7</button>
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="8">8</button>
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="9">9</button>
+                        <button class="p-5 text-2xl transition-all duration-200 bg-teal-200 border-2 border-gray-200 basis-1/4 hover:bg-gray-100 btn-last" id="multiply">&times;</button>
+                   </div>
+                   <div class="flex border-teal-300 btn-line-2">
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="4">4</button>
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="5">5</sup></button>
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="6">6</button>
+                        <button class="p-5 text-2xl transition-all duration-200 bg-teal-200 border-2 border-gray-200 basis-1/4 hover:bg-gray-100 btn-last" id="plus">+</button>
+                   </div>
+                   <div class="flex border-teal-300 btn-line-2">
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="1">1</button>
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="2">2</button>
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn basis-1/4 hover:bg-gray-100 " id="3">3</button>
+                        <button class="p-5 text-2xl transition-all duration-200 bg-teal-200 border-2 border-gray-200 basis-1/4 hover:bg-gray-100 btn-last" id="minus">-</button>
+                   </div>
+                   <div class="flex border-teal-300 btn-line-2">
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100 rounded-bl-xl" id="plus-minus">-/+</button>
+                        <button class="p-5 text-5xl transition-all duration-200 border-2 border-r-0 border-gray-200 basis-1/4 hover:bg-gray-100" id="dot">&sdot;</sup></button>
+                        <button class="p-5 text-xl transition-all duration-200 border-2 border-r-0 border-gray-200 btn-0 basis-1/4 hover:bg-gray-100 " id="0">0</button>
+                        <button class="p-5 text-2xl transition-all duration-200 bg-teal-200 border-2 border-gray-200 basis-1/4 hover:bg-gray-100 btn-last rounded-br-xl" id="equal">=</button>
+                   </div>
+            </div>
+
+
+             <!-- History -->
+
+         <div class="invisible h-0 px-2 text-xl text-teal-800 bg-gray-200 history-container">
+                    <ul class="history-list ">
+                         <li class="no-item-li">No items Yet</li>
+                    </ul>
+          </div>
+        </div>
+
+
+
+       
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
