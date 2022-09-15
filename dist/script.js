@@ -16,13 +16,14 @@ const btnDelete = document.querySelector('#delete')
 const btnC = document.querySelector('#c')
 const btnCE = document.querySelector('#ce')
 const noItemLi = document.querySelector('.no-item-li')
-let toggle = 0;
-let operation = '';
-let currentVal = ''
-let prevValue;
+let currentVal = '';
+let prevValue = '';
 let spacialOp = false;
-let dotop = false;
+let currentOperation = '';
+let operationCount = 0;
+let dotToggle = false;
 let prevOp = '';
+let toggle = 0;
 // History list
 const historyList = document.querySelector('.history-list')
 const historyContainer = document.querySelector('.history-container')
@@ -31,9 +32,17 @@ let historyToggle = false;
 
 
 
-
 // functions
 const addNumber = (e) => {
+     btnAdd.disabled = false;
+    btnSub.disabled = false;
+    btnMultiply.disabled = false;
+    btnDevide.disabled = false;
+    btnModulo.disabled = false;
+    btnOneX.disabled = false;
+    btnSquare.disabled = false;
+    btnSquareRoot.disabled = false;
+    btnEqual.disabled = false;
     if (spacialOp === false) {
        if (currentVal == '0') {
         currentVal =  e.target.id
@@ -55,25 +64,26 @@ const addNumber = (e) => {
     
 }
 const zeroPressed = () => {
-     if ((currentVal !== '0' && currentVal !== '') || operation !== '') {
+     if ((currentVal !== '0' && currentVal !== '') || currentOperation !== '') {
          currentVal = currentVal + '0'
          screen.value = currentVal;
         }
 }
 const operationPerform = (e) => {
-   let twoOp =0;
-    dotop = false;
+    spacialOp = true;
+    dotToggle = false;
     console.log(
         `
         before perform 
         current val = ${currentVal}
         prev val = ${prevValue}
-        operation = ${operation}
-       
+        currentOperation = ${currentOperation}
+        prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
         `
     );
-    
-    if (toggle === 0 && currentVal !== '') {
+    if ((toggle === 0 && currentVal !== '')               ) {
        
         prevValue = currentVal;
         screen.value = prevValue
@@ -81,54 +91,51 @@ const operationPerform = (e) => {
         toggle = 1;
         noItemLi.style.visibility = 'hidden'
     }
-    else if (operation === 'plus' && currentVal !== '') {
+    else if (currentOperation === 'plus' && currentVal !== '') {
         let node = document.createElement('li');
         node.appendChild(document.createTextNode(` ${prevValue} + ${currentVal} = ${(+prevValue) + (+currentVal)} `));
         historyList.appendChild(node);
-
+        prevOp = 'plus'
         prevValue = (+prevValue) + (+currentVal);
         screen.value = prevValue
         currentVal = ''; 
         toggle = 1;
-        
-
-        
     }
-    else if (operation === 'minus' && currentVal !== '') {
+    else if (currentOperation === 'minus' && currentVal !== '') {
         let node = document.createElement('li');
         node.appendChild(document.createTextNode(` ${prevValue} - ${currentVal} = ${(+prevValue) - (+currentVal)} `));
         historyList.appendChild(node);
-
+         prevOp = 'minus'
         prevValue = (+prevValue) - (+currentVal);
         screen.value = prevValue;
          currentVal = '';
          toggle = 1;
     }
-    else if (operation === 'multiply' && currentVal !== '') {
+    else if (currentOperation === 'multiply' && currentVal !== '') {
         let node = document.createElement('li');
         node.appendChild(document.createTextNode(` ${prevValue} x ${currentVal} = ${(+prevValue) * (+currentVal)} `));
         historyList.appendChild(node);
-
+         prevOp = 'multiply'
         prevValue = (+prevValue) * (+currentVal);
         screen.value = prevValue;
          currentVal = '';
          toggle = 1;
     }
-    else if (operation === 'devide' && currentVal !== '') {
+    else if (currentOperation === 'devide' && currentVal !== '') {
          let node = document.createElement('li');
         node.appendChild(document.createTextNode(` ${prevValue} / ${currentVal} = ${(+prevValue) / (+currentVal)} `));
         historyList.appendChild(node);
-        
+         prevOp = 'devide'
         prevValue = (+prevValue) / (+currentVal);
         screen.value = prevValue;
          currentVal = '';
          toggle = 1;
     }
-    else if (operation === 'modulo' && currentVal !== '') {
+    else if (currentOperation === 'modulo' && currentVal !== '') {
          let node = document.createElement('li');
         node.appendChild(document.createTextNode(` ${prevValue} % ${currentVal} = ${(+prevValue) % (+currentVal)} `));
         historyList.appendChild(node);
-
+         prevOp = 'modulo'
         prevValue = (+prevValue) % (+currentVal);
         screen.value = prevValue;
          currentVal = '';
@@ -141,51 +148,146 @@ const operationPerform = (e) => {
 
     }
 
-    if (e.target.id === 'equal') {
-       operation = prevOp
-    }
-    else {
-        operation = e.target.id;
-        currentVal = ''
-    }
+        currentOperation = e.target.id;
     
+       
+    operationCount++;
+    console.log(
+        `
+        after perform 
+        current val = ${currentVal}
+        prev val = ${prevValue}
+          currentOperation = ${currentOperation}
+           prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
+        `
+    );
+}
+const performEqual = (e) => {
+    operationPerform(e);
+    currentVal = '0'
+    
+    currentOperation = ''  
+    spacialOp = true;
+}
+const performCE = (e) => {
+    currentVal = ''
+    screen.value = '0'
+}
+const performC = (e) => {
+    currentVal = ''
+    screen.value = '0'
+    prevValue = ''
+    toggle = 0
+    currentOperation= '1'
+    dotToggle = false;
+    spacialOp = false;
+    btnAdd.disabled = true;
+    btnSub.disabled = true;
+    btnMultiply.disabled = true;
+    btnDevide.disabled = true;
+    btnModulo.disabled = true;
+    btnOneX.disabled = true;
+    btnSquare.disabled = true;
+    btnSquareRoot.disabled = true;
+    btnEqual.disabled = true;
+   
+}
+const squareRootPerform = (e) => {
+     console.log(
+        `
+        before perform 
+        current val = ${currentVal}
+        prev val = ${prevValue}
+        operation = ${operation}
+        prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
+        `
+    );
+   prevValue = Math.sqrt(screen.value);
+    screen.value = prevValue;
+    currentVal =prevValue;
+    operation = ""; 
+    spacialOp = true
+    dotToggle = false;
     console.log(
         `
         after perform 
         current val = ${currentVal}
         prev val = ${prevValue}
           operation = ${operation}
-          
+           prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
         `
     );
 }
-const squareRootPerform = (e) => {
-   prevValue = Math.sqrt(screen.value);
-    screen.value = prevValue;
-    currentVal =prevValue;
-    operation = ""; 
-    spacialOp = true
-    dotop = false;
-}
 const squarePerform = (e) => {
+     console.log(
+        `
+        before perform 
+        current val = ${currentVal}
+        prev val = ${prevValue}
+        operation = ${operation}
+        prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
+        `
+    );
     prevValue = (+currentVal) * (+currentVal);
     screen.value = prevValue;
     currentVal = prevValue;
     operation = ""; 
     prevOp = operation;
     spacialOp = true;
-    dotop = false;
+    dotToggle = false;
+    console.log(
+        `
+        after perform 
+        current val = ${currentVal}
+        prev val = ${prevValue}
+          operation = ${operation}
+           prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
+        `
+    );
 }
+
 const oneXPerform = (e) => {
+     console.log(
+        `
+        before perform 
+        current val = ${currentVal}
+        prev val = ${prevValue}
+        operation = ${operation}
+        prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
+        `
+    );
     prevValue = 1 / (+currentVal);
     screen.value = prevValue;
     currentVal = prevValue;
     operation = ""; 
     spacialOp = true;
-    dotop = false;
+    dotToggle = false;
+    console.log(
+        `
+        after perform 
+        current val = ${currentVal}
+        prev val = ${prevValue}
+          operation = ${operation}
+           prevOp = ${prevOp}
+        toggle = ${toggle}
+        e.target.id = ${e.target.id}
+        `
+    );
 }
 const addDot = (e) => {
-    if (dotop === false)
+    if (dotToggle === false)
     {
         if (currentVal == '') {
         currentVal = '0' + '.';
@@ -195,7 +297,7 @@ const addDot = (e) => {
         currentVal = currentVal + '.'
         screen.value = currentVal
     }
-        dotop = true;
+        dotToggle = true;
     }
 }
 const setPlusMinus = (e) => {
@@ -214,34 +316,26 @@ const handleDelete = (e) => {
     currentVal = currentVal.substring(0, currentVal.length - 1);
     screen.value = currentVal
 }
-const handleC = (e) => {
-    currentVal = "0"
-    screen.value = '0'
-    prevValue = ""
-    toggle = 0
-    operation = ''
-    spacialOp = false;
-    dotop = false;   
-}
-const handleCE = (e) => {
-currentVal = "0"
-    screen.value = '0'
-}
 
 
 
 
-// Eventlistners
+// Event Listeners
 for (const btn of digitBtn) {
     btn.addEventListener('click', addNumber);
 }
-
 btnZero.addEventListener('click', zeroPressed);
+btnAdd.addEventListener('click', operationPerform);
+btnSub.addEventListener('click', operationPerform);
 btnAdd.addEventListener('click', operationPerform); 
 btnSub.addEventListener('click', operationPerform); 
 btnMultiply.addEventListener('click', operationPerform);
 btnDevide.addEventListener('click', operationPerform);
-btnModulo.addEventListener('click', operationPerform);    
+btnModulo.addEventListener('click', operationPerform); 
+btnEqual.addEventListener('click', performEqual);
+btnCE.addEventListener('click', performCE)
+btnC.addEventListener('click', performC)
+ 
 btnSquareRoot.addEventListener('click', squareRootPerform);    
 btnSquare.addEventListener('click', squarePerform)
 btnOneX.addEventListener('click', oneXPerform)
@@ -249,12 +343,14 @@ btnDot.addEventListener('click', addDot)
 btnPlusMinus.addEventListener('click', setPlusMinus)    
 btnEqual.addEventListener('click', operationPerform)
 btnDelete.addEventListener('click', handleDelete)
-btnC.addEventListener('click', handleC)
-btnCE.addEventListener('click', handleCE)
+
+
+
+
 historyBtn.addEventListener('click', () => {
     historyContainer.style.transition = 'height 2s ease-in'
     if (historyToggle === false) {
-         historyContainer.style.visibility = 'visible'
+        historyContainer.style.visibility = 'visible'
         historyContainer.style.height = '450px';
        
         historyToggle = true;
@@ -264,21 +360,148 @@ historyBtn.addEventListener('click', () => {
         historyToggle = false;
         
     }
-    
-
-})
-
-
-
+});
 
 document.addEventListener('keydown', (event) => {
     if (event.key > 0 && event.key < 10) {
-        screen.value = screen.value + event.key
-    } 
-    if (event.key == 0) {
-        zeroPressed();
+      if (spacialOp === false) {
+        if (currentVal == '0') {
+                 currentVal =  event.key
+                 screen.value = currentVal;
+        }
+        else
+        {
+            currentVal = currentVal + event.key
+            screen.value = currentVal;
+        } 
+        
+    }else {
+        currentVal =  event.key
+        screen.value = currentVal;
+        spacialOp = false;
+        
     }
+  } 
+  if (event.key == 0) {
+        zeroPressed();
+  }
 });
+
+
+
+
+
+
+
+
+// let toggle = 0;
+// let operation = '';
+// let currentVal = ''
+// let prevValue;
+// let spacialOp = false;
+// let dotToggle = false;
+// let prevOp = '';
+// // History list
+// const historyList = document.querySelector('.history-list')
+// const historyContainer = document.querySelector('.history-container')
+// const historyBtn = document.querySelector('.history-btn')
+// let historyToggle = false;
+
+
+
+
+// 
+//
+// 
+// const handleC = (e) => {
+//      console.log(
+//         `
+//         before perform 
+//         current val = ${currentVal}
+//         prev val = ${prevValue}
+//         operation = ${operation}
+//         prevOp = ${prevOp}
+//         toggle = ${toggle}
+//         e.target.id = ${e.target.id}
+//         `
+//     );
+//     currentVal = ""
+//     screen.value = '0'
+//     prevValue = ""
+    
+   
+//     operation = ''
+//     spacialOp = false;
+//     dotToggle = false;   
+//     console.log(
+//         `
+//         after perform 
+//         current val = ${currentVal}
+//         prev val = ${prevValue}
+//           operation = ${operation}
+//            prevOp = ${prevOp}
+//         toggle = ${toggle}
+//         e.target.id = ${e.target.id}
+//         `
+//     );
+// }
+// const handleCE = (e) => {
+//      console.log(
+//         `
+//         before perform 
+//         current val = ${currentVal}
+//         prev val = ${prevValue}
+//         operation = ${operation}
+//         prevOp = ${prevOp}
+//         toggle = ${toggle}
+//         e.target.id = ${e.target.id}
+//         `
+//     );
+// currentVal = "0"
+//     screen.value = '0'
+    
+//     console.log(
+//         `
+//         after perform 
+//         current val = ${currentVal}
+//         prev val = ${prevValue}
+//           operation = ${operation}
+//            prevOp = ${prevOp}
+//         toggle = ${toggle}
+//         e.target.id = ${e.target.id}
+//         `
+//     );
+// }
+
+
+
+
+// // Eventlistners
+// for (const btn of digitBtn) {
+//     btn.addEventListener('click', addNumber);
+// }
+
+// btnZero.addEventListener('click', zeroPressed);
+// btnAdd.addEventListener('click', operationPerform); 
+// btnSub.addEventListener('click', operationPerform); 
+// btnMultiply.addEventListener('click', operationPerform);
+// btnDevide.addEventListener('click', operationPerform);
+// btnModulo.addEventListener('click', operationPerform);    
+// btnSquareRoot.addEventListener('click', squareRootPerform);    
+// btnSquare.addEventListener('click', squarePerform)
+// btnOneX.addEventListener('click', oneXPerform)
+// btnDot.addEventListener('click', addDot)
+// btnPlusMinus.addEventListener('click', setPlusMinus)    
+// btnEqual.addEventListener('click', operationPerform)
+// btnDelete.addEventListener('click', handleDelete)
+// btnC.addEventListener('click', handleC)
+// btnCE.addEventListener('click', handleCE)
+//
+
+
+
+
+// 
 
 
  
